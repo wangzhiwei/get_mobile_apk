@@ -18,6 +18,9 @@ namespace APKExtractor.Models
         /// <summary>默认导出目录（空则使用程序目录下APK_Export）</summary>
         public string ExportPath { get; set; }
 
+        /// <summary>界面语言（zh=中文，en=英文）</summary>
+        public string Language { get; set; } = "zh";
+
         private static readonly string ConfigFile = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory, "config.json");
 
@@ -59,7 +62,8 @@ namespace APKExtractor.Models
             sb.AppendLine("{");
             sb.AppendLine($"  \"AdbPath\": {EscapeJson(AdbPath)},");
             sb.AppendLine($"  \"AaptPath\": {EscapeJson(AaptPath)},");
-            sb.AppendLine($"  \"ExportPath\": {EscapeJson(ExportPath)}");
+            sb.AppendLine($"  \"ExportPath\": {EscapeJson(ExportPath)},");
+            sb.AppendLine($"  \"Language\": {EscapeJson(Language)}");
             sb.AppendLine("}");
             return sb.ToString();
         }
@@ -78,6 +82,14 @@ namespace APKExtractor.Models
             config.AdbPath = ExtractValue(json, "AdbPath");
             config.AaptPath = ExtractValue(json, "AaptPath");
             config.ExportPath = ExtractValue(json, "ExportPath");
+            config.Language = ExtractValue(json, "Language");
+            
+            // Default to Chinese if language is not set
+            if (string.IsNullOrEmpty(config.Language))
+            {
+                config.Language = "zh";
+            }
+            
             return config;
         }
 

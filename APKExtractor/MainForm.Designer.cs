@@ -14,6 +14,7 @@ namespace APKExtractor
         private System.Windows.Forms.Button btnRefreshDevices;
         private System.Windows.Forms.Label lblDeviceCount;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.ComboBox cmbLanguage;
 
         // 右侧：应用列表
         private System.Windows.Forms.GroupBox grpApps;
@@ -53,6 +54,7 @@ namespace APKExtractor
             this.btnRefreshDevices = new System.Windows.Forms.Button();
             this.lblDeviceCount = new System.Windows.Forms.Label();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.grpApps = new System.Windows.Forms.GroupBox();
             this.lvwApps = new System.Windows.Forms.ListView();
             this.pnlAppButtons = new System.Windows.Forms.Panel();
@@ -98,6 +100,7 @@ namespace APKExtractor
             this.grpDevices.Controls.Add(this.btnRefreshDevices);
             this.grpDevices.Controls.Add(this.lblDeviceCount);
             this.grpDevices.Controls.Add(this.btnSettings);
+            this.grpDevices.Controls.Add(this.cmbLanguage);
             this.grpDevices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpDevices.Location = new System.Drawing.Point(0, 0);
             this.grpDevices.Name = "grpDevices";
@@ -156,6 +159,17 @@ namespace APKExtractor
             this.btnSettings.Text = "⚙ 设置";
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // cmbLanguage
+            // 
+            this.cmbLanguage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbLanguage.Items.AddRange(new object[] { "中文", "English" });
+            this.cmbLanguage.Location = new System.Drawing.Point(160, 372);
+            this.cmbLanguage.Name = "cmbLanguage";
+            this.cmbLanguage.Size = new System.Drawing.Size(78, 20);
+            this.cmbLanguage.TabIndex = 4;
+            this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
             // 
             // grpApps
             // 

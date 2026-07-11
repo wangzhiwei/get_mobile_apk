@@ -42,6 +42,7 @@
     <Compile Include="Models\AppInfo.cs" />
     <Compile Include="Models\AppConfig.cs" />
     <Compile Include="AdbHelper.cs" />
+    <Compile Include="LanguageManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

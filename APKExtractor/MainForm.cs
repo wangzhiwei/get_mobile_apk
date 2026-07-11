@@ -21,6 +21,11 @@ namespace APKExtractor
         {
             InitializeComponent();
             _config = AppConfig.Load();
+            
+            // 设置初始语言
+            LanguageManager.CurrentLanguage = _config.Language;
+            cmbLanguage.SelectedIndex = _config.Language == "zh" ? 0 : 1;
+            
             _adb = new AdbHelper(_config);
             _adb.OnLogMessage += AppendLog;
             _adb.OnExportProgress += UpdateProgress;
@@ -516,6 +521,71 @@ namespace APKExtractor
                     _ = RefreshDevicesAsync();
                 }
             }
+        }
+
+        // ==================== 多语言支持 ====================
+
+        private void cmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string newLang = cmbLanguage.SelectedItem.ToString();
+            string langCode = newLang == "English" ? "en" : "zh";
+            
+            if (LanguageManager.CurrentLanguage != langCode)
+            {
+                LanguageManager.CurrentLanguage = langCode;
+                _config.Language = langCode;
+                _config.Save();
+                
+                UpdateUIText();
+                AppendLog(LanguageManager.Get("MainForm_Log_ConfigUpdated"));
+            }
+        }
+
+        private void UpdateUIText()
+        {
+            // 更新主窗体标题
+            this.Text = LanguageManager.Get("MainForm_Title");
+            
+            // 更新设备区域
+            grpDevices.Text = LanguageManager.Get("MainForm_GroupBoxDevices");
+            btnRefreshDevices.Text = LanguageManager.Get("MainForm_BtnRefreshDevices");
+            btnSettings.Text = LanguageManager.Get("MainForm_BtnSettings");
+            
+            // 更新设备列表列标题
+            if (lvwDevices.Columns.Count >= 2)
+            {
+                lvwDevices.Columns[0].Text = LanguageManager.Get("MainForm_ColDeviceModel");
+                lvwDevices.Columns[1].Text = LanguageManager.Get("MainForm_ColDeviceSerial");
+            }
+            
+            // 更新设备计数
+            lblDeviceCount.Text = string.Format(LanguageManager.Get("MainForm_LblDeviceCount"), lvwDevices.Items.Count);
+            
+            // 更新应用区域
+            grpApps.Text = LanguageManager.Get("MainForm_GroupBoxApps");
+            btnRefreshApps.Text = LanguageManager.Get("MainForm_BtnRefreshApps");
+            btnSelectAll.Text = LanguageManager.Get("MainForm_BtnSelectAll");
+            btnDeselectAll.Text = LanguageManager.Get("MainForm_BtnDeselectAll");
+            btnFetchLabels.Text = LanguageManager.Get("MainForm_BtnFetchLabels");
+            
+            // 更新应用列表列标题
+            if (lvwApps.Columns.Count >= 4)
+            {
+                lvwApps.Columns[0].Text = LanguageManager.Get("MainForm_ColAppName");
+                lvwApps.Columns[1].Text = LanguageManager.Get("MainForm_ColPackageName");
+                lvwApps.Columns[2].Text = LanguageManager.Get("MainForm_ColVersion");
+                lvwApps.Columns[3].Text = LanguageManager.Get("MainForm_ColApkPath");
+            }
+            
+            // 更新应用计数
+            lblAppCount.Text = string.Format(LanguageManager.Get("MainForm_LblAppCount"), lvwApps.Items.Count);
+            
+            // 更新底部区域
+            lblExportPath.Text = LanguageManager.Get("MainForm_LblExportPath");
+            btnBrowse.Text = LanguageManager.Get("MainForm_BtnBrowse");
+            btnExport.Text = LanguageManager.Get("MainForm_BtnExport");
+            btnCancelExport.Text = LanguageManager.Get("MainForm_BtnCancel");
+            lblProgress.Text = LanguageManager.Get("MainForm_LblProgress");
         }
 
         // ==================== 窗体事件 ====================
