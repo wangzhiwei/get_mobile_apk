@@ -1,0 +1,6 @@
+f:\work\source\get_mobile_apk\APKExtractor\bin\Release\APKExtractor.exe
+f:\work\source\get_mobile_apk\APKExtractor\bin\Release\APKExtractor.pdb
+f:\work\source\get_mobile_apk\APKExtractor\obj\Release\APKExtractor.csproj.AssemblyReference.cache
+f:\work\source\get_mobile_apk\APKExtractor\obj\Release\APKExtractor.csproj.CoreCompileInputs.cache
+f:\work\source\get_mobile_apk\APKExtractor\obj\Release\APKExtractor.exe
+f:\work\source\get_mobile_apk\APKExtractor\obj\Release\APKExtractor.pdb
